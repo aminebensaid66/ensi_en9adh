@@ -57,7 +57,7 @@ class DataStore:
 data_store = DataStore()
 
 
-async def handle_client(websocket, path):
+async def handle_client(websocket):
     """Handle WebSocket client connections"""
     print(f"Client connected from {websocket.remote_address}")
     
@@ -125,10 +125,11 @@ async def handle_client(websocket, path):
 
 async def main():
     """Start the WebSocket server"""
-    host = "localhost"
+    host = "0.0.0.0"  # Listen on all network interfaces
     port = 8765
     
     print(f"Starting WebSocket server on ws://{host}:{port}")
+    print(f"Access from other devices on your network: ws://10.13.0.55:{port}")
     print("\nAvailable actions:")
     print("  - set_color: Set color to 'blue' or 'red'")
     print("  - set_number: Set number to 9, 6, 5, or 3")

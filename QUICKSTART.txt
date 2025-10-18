@@ -1,0 +1,81 @@
+╔══════════════════════════════════════════════════════╗
+║       🚀 WEBSOCKET SERVER QUICK REFERENCE 🚀        ║
+╚══════════════════════════════════════════════════════╝
+
+📌 MAIN COMMANDS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ./start_servers.sh    Start everything (recommended)
+  ./stop_servers.sh     Stop all servers
+  Ctrl+C                Stop servers (if running)
+
+📱 ACCESS FROM PHONE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  1. Connect phone to same WiFi
+  2. Run: ./start_servers.sh
+  3. Open phone browser
+  4. Go to URL shown in terminal
+  5. Click "Connect" button
+
+💻 ACCESS FROM COMPUTER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Web:    http://localhost:8000/web_client.html
+  Python: python3 client_example.py
+  Data:   python3 get_data.py
+
+📊 VIEW LOGS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  tail -f websocket.log    WebSocket server logs
+  tail -f http.log         HTTP server logs
+
+🎮 WEBSOCKET ACTIONS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  SET OPERATIONS:
+    • set_color   → Set 'blue' or 'red'
+    • set_number  → Set 9, 6, 5, or 3
+    • set_shapes  → Set cubes & triangles count
+  
+  GET OPERATIONS:
+    • get_color   → Get current color
+    • get_number  → Get current number
+    • get_shapes  → Get current shapes
+    • get_all     → Get all data
+
+🔧 MANUAL SERVER START
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  python3 websocket_server.py    WebSocket only
+  python3 start_http_server.py   HTTP only
+
+🐛 TROUBLESHOOTING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Port in use:
+    → ./stop_servers.sh
+    → ./start_servers.sh
+  
+  Can't connect from phone:
+    → Check same WiFi network
+    → Check IP address matches
+    → Test on computer first
+  
+  WebSocket errors:
+    → Check websocket.log
+    → Restart servers
+    → Verify Python 3.7+
+
+📦 FILES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  start_servers.sh       🎯 Main startup script
+  stop_servers.sh        🛑 Stop script
+  websocket_server.py    🖥️  WebSocket backend
+  start_http_server.py   🌐 HTTP server
+  web_client.html        📱 Web interface
+  client_example.py      🐍 Python example
+  get_data.py           📊 Get data script
+
+🌐 DEFAULT PORTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  WebSocket: 8765
+  HTTP:      8000
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Made with ❤️  for ENSI | Questions? Check README_NEW.md
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

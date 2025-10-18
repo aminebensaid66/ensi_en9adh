@@ -94,6 +94,14 @@
     <div class="container">
         <h1>WebSocket Control Panel</h1>
         
+        <div class="section">
+            <h3>Server Connection</h3>
+            <input type="text" id="serverUrl" placeholder="Auto-detected or enter IP" value="localhost" style="width: 200px; padding: 8px;">
+            <input type="text" id="serverPort" placeholder="Port" value="8765" style="width: 80px; padding: 8px;">
+            <button onclick="connect()">Connect</button>
+            <button onclick="disconnect()" style="background-color: #f44336;">Disconnect</button>
+        </div>
+        
         <div id="status" class="disconnected">Disconnected</div>
         
         <div class="section">
@@ -140,8 +148,25 @@
     <script>
         let ws = null;
         
+        // Auto-detect server IP from current page URL when loaded via HTTP
+        function detectServerIP() {
+            const urlInput = document.getElementById('serverUrl');
+            if (window.location.hostname && window.location.hostname !== '' && window.location.protocol.startsWith('http')) {
+                // If accessed via HTTP server, use that IP
+                urlInput.value = window.location.hostname;
+            }
+        }
+        
+        // Run detection when page loads
+        window.addEventListener('DOMContentLoaded', detectServerIP);
+        
         function connect() {
-            ws = new WebSocket('ws://localhost:8765');
+            const serverIp = document.getElementById('serverUrl').value;
+            const serverPort = document.getElementById('serverPort').value;
+            const wsUrl = `ws://${serverIp}:${serverPort}`;
+            
+            addOutput(`Connecting to ${wsUrl}...`);
+            ws = new WebSocket(wsUrl);
             
             ws.onopen = function() {
                 document.getElementById('status').textContent = 'Connected';
@@ -157,13 +182,20 @@
             ws.onclose = function() {
                 document.getElementById('status').textContent = 'Disconnected';
                 document.getElementById('status').className = 'disconnected';
-                addOutput('Disconnected from server. Reconnecting in 3 seconds...');
-                setTimeout(connect, 3000);
+                addOutput('Disconnected from server');
             };
             
             ws.onerror = function(error) {
-                addOutput('Error: ' + error.message);
+                addOutput('Error: Connection failed');
             };
+        }
+        
+        function disconnect() {
+            if (ws) {
+                ws.close();
+                ws = null;
+                addOutput('Manually disconnected');
+            }
         }
         
         function addOutput(message) {
